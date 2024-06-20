@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from './ui/button'
 import Link from 'next/link'
+import { OrganizationSwitcher, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 const Navbar = () => {
     return (
@@ -15,14 +16,21 @@ const Navbar = () => {
                 <li className='cursor-pointer '>Dashboard</li>
             </ul>
 
-            <div className='flex-[2] flex items-center justify-end gap-5'>
-                <Link href={'/sign-in'}>
-                    <Button variant='outline'>Log in</Button>
-                </Link>
-                <Link href={'/sign-up'}>
-                    <Button>Sign up</Button>
-                </Link>
-            </div>
+            <SignedIn>
+                <OrganizationSwitcher appearance={{elements: {userPreviewAvatarBox: {scale: '1.5'}, organizationPreviewAvatarBox: {scale: '1.5'}}}} />
+                <UserButton appearance={{elements: {avatarBox: {scale: '1.2'}}}} />
+            </SignedIn>
+
+            <SignedOut>
+                <div className='flex-[2] flex items-center justify-end gap-5'>
+                    <Link href={'/sign-in'}>
+                        <Button variant='outline'>Log in</Button>
+                    </Link>
+                    <Link href={'/sign-up'}>
+                        <Button>Sign up</Button>
+                    </Link>
+                </div>
+            </SignedOut>
         </div>
     )
 }
