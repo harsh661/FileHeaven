@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import ConvexClientProvider from "@/app/ConvexClientProvider";
 import Navbar from "@/components/navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Montserrat({ subsets: ["latin"], weight: ['300', '400', '500', '600', '700', '800'] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,10 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={font.className}>
         <ConvexClientProvider>
           <Navbar />
           {children}
+          <div className="shape1"></div>
+          <div className="shape2"></div>
         </ConvexClientProvider>
       </body>
     </html>

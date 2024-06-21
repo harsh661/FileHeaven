@@ -18,8 +18,29 @@ body {
   background: rgb(var(--background-rgb));
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.shape1, .shape2 {
+  position: fixed;
+  background-color: red;
+}
+
+.shape1 {
+  bottom: 10%;
+  left: 10%;
+  width: 30vw;
+  height: 40vh;
+  border-radius: 100%;
+  background-color: #FFD05930;
+  mix-blend-mode: multiply;
+  filter: blur(80px);
+}
+
+.shape2 {
+  bottom: 15%;
+  right: 10%;
+  width: 40vw;
+  height: 50vh;
+  border-radius: 100%;
+  background-color: #216d6530;
+  mix-blend-mode: multiply;
+  filter: blur(80px);
 }
