@@ -12,7 +12,27 @@ export default function ConvexClientProvider({
     children: ReactNode;
 }) {
     return (
-        <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+        <ClerkProvider
+            appearance={{
+                elements: {
+                    cardBox: { boxShadow: 'none' },
+                    card: { boxShadow: 'none' },
+                    footer: { background: '#fff' },
+                    formButtonPrimary: {
+                        padding: "8px 0",
+                        background: "#216D66",
+                        "&:hover": {
+                            background: "#216D66",
+                            opacity: 90
+                        },
+                        boxShadow: 'none !important',
+                        fontSize: '16px',
+                        borderRadius: "50px"
+                    }
+                }
+            }}
+            publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+        >
             <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
                 {children}
             </ConvexProviderWithClerk>

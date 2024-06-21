@@ -15,6 +15,9 @@ export default function Home() {
       <div className="rounded-3xl border border-black w-full max-w-screen-xl h-[80vh] my-20">
 
       </div>
+
+      <div className="shape1"></div>
+      <div className="shape2"></div>
     </div>
   );
 }

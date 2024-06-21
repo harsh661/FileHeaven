@@ -5,7 +5,7 @@ import { SignedIn, SignedOut } from '@clerk/nextjs'
 
 const Navbar = () => {
     return (
-        <div className='fixed w-full h-16 flex items-center px-5 py-2'>
+        <div className='fixed w-full h-16 flex items-center px-5 py-2 glassmorphism z-10'>
             <div className='flex-[2] flex text-2xl font-medium'>
                 <Link href={'/'} className='flex items-center gap-2'>
                     <svg width="60" height="60" viewBox="0 0 31 31">

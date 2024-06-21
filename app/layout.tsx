@@ -22,8 +22,6 @@ export default function RootLayout({
         <ConvexClientProvider>
           <Navbar />
           {children}
-          <div className="shape1"></div>
-          <div className="shape2"></div>
         </ConvexClientProvider>
       </body>
     </html>
