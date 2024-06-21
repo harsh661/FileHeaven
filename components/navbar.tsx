@@ -1,36 +1,43 @@
 import React from 'react'
 import Button from './ui/button'
 import Link from 'next/link'
-import { OrganizationSwitcher, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut } from '@clerk/nextjs'
 
 const Navbar = () => {
     return (
         <div className='fixed w-full h-16 flex items-center px-5 py-2'>
-            <div className='flex text-2xl font-semibold mr-10'>
-                <Link href={'/'}>FileHeaven</Link>
+            <div className='flex-[2] flex text-2xl font-semibold'>
+                <Link href={'/'} className='flex items-center gap-2'>
+                    <svg width="60" height="60" viewBox="0 0 31 31">
+                        <path xmlns="http://www.w3.org/2000/svg" d="M27.86 20a5.25 5.25 0 0 1-4.09 2H14.5a1.5 1.5 0 0 0-1.5 1.48v3.27l1.08-1.62a.5.5 0 0 1 .83.55l-2 3a.5.5 0 0 1-.16.15.45.45 0 0 1-.45 0 .5.5 0 0 1-.12-.11l-2-3a.5.5 0 0 1 .83-.55l.99 1.59v-3.28a2.48 2.48 0 0 1 .74-1.78 2.43 2.43 0 0 1 1.77-.7h9.26a4.26 4.26 0 0 0 3.32-1.58 4.3 4.3 0 0 0 .85-3.61 4.18 4.18 0 0 0-1.73-2.57 4.25 4.25 0 0 0-4.42-.24 6.47 6.47 0 0 1-2.49 4.17.5.5 0 1 1-.6-.8 5.47 5.47 0 0 0 2.14-3.76 4.4 4.4 0 0 0 0-.6 5.36 5.36 0 0 0-3.5-5.12 5.56 5.56 0 0 0-5.11.66A5.48 5.48 0 0 0 10 12a.56.56 0 0 1-.15.49.52.52 0 0 1-.47.15 4.27 4.27 0 1 0-2.07 8.28h2.21a1.6 1.6 0 0 0 1.07-.44 1.5 1.5 0 0 0 .41-1.07v-3.26l-1.08 1.63a.5.5 0 1 1-.83-.55l2-3a.48.48 0 0 1 .78 0l2 3a.5.5 0 1 1-.83.55L12 16.15v3.26a2.48 2.48 0 0 1-.74 1.77 2.63 2.63 0 0 1-1.78.73H7.1A5.27 5.27 0 0 1 9 11.51a6.48 6.48 0 0 1 8.71-5.61 6.35 6.35 0 0 1 4.17 5.92 5.26 5.26 0 0 1 4.89.59 5.2 5.2 0 0 1 2.15 3.19 5.3 5.3 0 0 1-1.06 4.4" stroke='#216D66' strokeWidth={1} />
+                    </svg>
+                    <p className='text-black/80'>File<span className='text-black/60'>Heaven</span></p>
+                </Link>
+            </div>
+            <div className='flex-1'>
+                <ul className='flex items-center justify-center w-max mx-auto font-medium text-black bg-white rounded-md shadow-sm'>
+                    <li className='cursor-pointer py-2 px-5 opacity-80 hover:opacity-90'>Features</li>
+                    <li className='cursor-pointer py-2 px-5 opacity-80 hover:opacity-90'>About</li>
+                    <li className='cursor-pointer py-2 px-5 opacity-80 hover:opacity-90'>Pricing</li>
+                </ul>
             </div>
 
-            <ul className='flex items-center space-x-5 flex-1'>
-                <li className='cursor-pointer '>Home</li>
-                <li className='cursor-pointer '>About</li>
-                <li className='cursor-pointer '>Dashboard</li>
-            </ul>
+            <div className='flex-[2] flex items-center justify-end gap-5'>
+                <SignedIn>
+                    <Link href={'/dashboard'}>
+                        <Button>Dashboard</Button>
+                    </Link>
+                </SignedIn>
 
-            <SignedIn>
-                <OrganizationSwitcher appearance={{elements: {userPreviewAvatarBox: {scale: '1.5'}, organizationPreviewAvatarBox: {scale: '1.5'}}}} />
-                <UserButton appearance={{elements: {avatarBox: {scale: '1.2'}}}} />
-            </SignedIn>
-
-            <SignedOut>
-                <div className='flex-[2] flex items-center justify-end gap-5'>
+                <SignedOut>
                     <Link href={'/sign-in'}>
                         <Button variant='outline'>Log in</Button>
                     </Link>
                     <Link href={'/sign-up'}>
                         <Button>Sign up</Button>
                     </Link>
-                </div>
-            </SignedOut>
+                </SignedOut>
+            </div>
         </div>
     )
 }
