@@ -51,3 +51,8 @@ body {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
+
+/* Clerk specific */
+.cl-internal-3gh7hq {
+  font-size: 16px;
+}

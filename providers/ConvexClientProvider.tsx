@@ -28,7 +28,16 @@ export default function ConvexClientProvider({
                         boxShadow: 'none !important',
                         fontSize: '16px',
                         borderRadius: "50px"
-                    }
+                    },
+                    organizationSwitcherTrigger: {
+                        padding: '8px',
+                        width: '100%',
+                        justifyContent: 'left',
+                        "&:focus-within" : { background: '#fff'}
+                    },
+                    avatarBox: { width: '32px', height: '32px' },
+                    organizationPreviewMainIdentifier: { fontSize: '16px' },
+                    organizationSwitcherTriggerIcon: { marginLeft: 'auto' }
                 }
             }}
             publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
