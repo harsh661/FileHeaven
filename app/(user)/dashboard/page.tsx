@@ -1,11 +1,10 @@
-'use client';
-
 import Button from '@/components/ui/button'
 import { api } from '@/convex/_generated/api'
 import { useOrganization, useUser } from '@clerk/nextjs';
 import { useMutation, useQuery } from 'convex/react'
 import React from 'react'
 import Header from '../_components/header';
+import NewFileDialog from '../_components/NewFileDialog';
 
 const dashboard = () => {
   // const { isLoaded: isOrgLoaded, organization } = useOrganization();
@@ -27,6 +26,9 @@ const dashboard = () => {
   return (
     <div className='px-5 lg:px-10 pb-5'>
       <Header />
+      <div className='py-5'>
+        <NewFileDialog />
+      </div>
     </div>
   )
 }
