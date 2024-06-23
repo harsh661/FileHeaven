@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/popover";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { RiDeleteBin7Line, RiStarLine, RiFileCopyLine } from "react-icons/ri";
+import DeleteFileDialog from './DeleteFileDialog';
 
 const FileCard = ({ title }: { title: string }) => {
     return (
@@ -24,10 +25,8 @@ const FileCard = ({ title }: { title: string }) => {
                             <RiStarLine size={20} />
                             <p>Add to favourites</p>
                         </div>
-                        <div className='flex items-center gap-1 cursor-pointer p-2 text-red-500 hover:bg-neutral-100 rounded-sm'>
-                            <RiDeleteBin7Line size={20} />
-                            <p>Move to trash</p>
-                        </div>
+                        {/* Delete option with confirmation before deleting */}
+                        <DeleteFileDialog />
                     </PopoverContent>
                 </Popover>
             </div>
