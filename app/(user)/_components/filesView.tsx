@@ -25,7 +25,7 @@ const FilesView = () => {
             <h2 className='font-medium text-lg'>My Files</h2>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
                 {(files && files.length > 0) ? files.map((file) => (
-                    <FileCard key={file._id} title={file.name} />
+                    <FileCard key={file._id} file={file} />
                 )) : (
                     <div>No Files uploaded!</div>
                 )}

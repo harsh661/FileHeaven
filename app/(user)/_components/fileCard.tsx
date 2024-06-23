@@ -5,10 +5,11 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { RiDeleteBin7Line, RiStarLine, RiFileCopyLine } from "react-icons/ri";
+import { RiStarLine, RiFileCopyLine } from "react-icons/ri";
 import DeleteFileDialog from './DeleteFileDialog';
+import { Doc } from '@/convex/_generated/dataModel';
 
-const FileCard = ({ title }: { title: string }) => {
+const FileCard = ({ file }: { file: Doc<"files"> }) => {
     return (
         <div className='flex flex-col w-full'>
             <div className='aspect-video flex items-center justify-center bg-neutral-200 rounded-lg relative'>
@@ -26,12 +27,12 @@ const FileCard = ({ title }: { title: string }) => {
                             <p>Add to favourites</p>
                         </div>
                         {/* Delete option with confirmation before deleting */}
-                        <DeleteFileDialog />
+                        <DeleteFileDialog file={file} />
                     </PopoverContent>
                 </Popover>
             </div>
             <div className='flex flex-col gap-2 py-1'>
-                <p className='font-medium line-clamp-2'>{title}</p>
+                <p className='font-medium line-clamp-2'>{file.name}</p>
             </div>
         </div>
     )

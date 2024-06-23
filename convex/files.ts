@@ -49,3 +49,22 @@ export const generateUploadUrl = mutation(async (ctx) => {
 
     return ctx.storage.generateUploadUrl();
 })
+
+export const deleteFile = mutation({
+    args: { fileId: v.id("files") },
+    handler: async (ctx, args) => {
+        const authorized = await ctx.auth.getUserIdentity();
+
+        if (!authorized) {
+            throw new ConvexError("You are not authorized to delete files. Please log in to your account.")
+        }
+
+        const file = ctx.db.get(args.fileId)
+
+        if (!file) {
+            throw new ConvexError("File does not exist!")
+        }
+
+        await ctx.db.delete(args.fileId)
+    },
+})

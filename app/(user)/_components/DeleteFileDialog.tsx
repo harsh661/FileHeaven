@@ -11,9 +11,14 @@ import {
 } from '@/components/ui/dialog';
 import Button from '@/components/ui/button';
 import { RiDeleteBin7Line } from "react-icons/ri";
+import { useMutation } from 'convex/react';
+import { api } from '@/convex/_generated/api';
+import { Doc } from '@/convex/_generated/dataModel';
+import toast from 'react-hot-toast';
 
 
-const DeleteFileDialog = () => {
+const DeleteFileDialog = ({ file }: { file: Doc<"files"> }) => {
+    const deleteFile = useMutation(api.files.deleteFile);
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -24,14 +29,21 @@ const DeleteFileDialog = () => {
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Are you sure?</DialogTitle>
-                    <DialogDescription className='text-neutral-700'>This cannot be undone lasdfj aslfkdj asdfk ad sfladsf askdjfk.</DialogDescription>
+                    <DialogTitle>Delete File</DialogTitle>
+                    <DialogDescription className='text-neutral-700'>Are you sure you want to delete this file, this action cannot be undone.</DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
                     <DialogClose>
                         <Button variant='outline'>Cancel</Button>
                     </DialogClose>
-                    <Button variant='danger' type="submit">Delete</Button>
+                    <Button onClick={() => {
+                        deleteFile({ fileId: file._id })
+                        toast.success("File deleted successfully")
+                    }}
+                        variant='danger'
+                        type="submit">
+                        Delete
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
