@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import ConvexClientProvider from "@/providers/ConvexClientProvider";
+import { Toaster } from 'react-hot-toast';
 
 const font = Montserrat({ subsets: ["latin"], weight: ['300', '400', '500', '600', '700', '800'] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
         <ConvexClientProvider>
           {children}
         </ConvexClientProvider>
+        <Toaster position="bottom-right"/>
       </body>
     </html>
   );

@@ -13,10 +13,10 @@ import { Input } from '@/components/ui/input';
 import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useOrganization, useUser } from '@clerk/nextjs';
+import toast from 'react-hot-toast';
 
 const NewFileDialog = () => {
     const [open, setOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
 
     const generateUploadUrl = useMutation(api.files.generateUploadUrl);
     const createFile = useMutation(api.files.createFile);
@@ -43,30 +43,40 @@ const NewFileDialog = () => {
     })
 
     const onSubmit = async (data: NewDocumentSchemaType) => {
+        setOpen(false);
+
         if (!data.file || !orgId) return;
-        try {
-            setIsLoading(true);
-            const postUrl = await generateUploadUrl();
-            const result = await fetch(postUrl, {
-                method: "POST",
-                headers: { "Content-Type": data.file!.type },
-                body: data.file,
-            });
-            const { storageId } = await result.json();
 
-            await createFile({
-                name: data.title,
-                fileId: storageId,
-                orgId,
-            })
+        // Use toast to show file upload status
+        toast.promise(
+            (async () => {
+                try {
+                    const postUrl = await generateUploadUrl();
+                    const result = await fetch(postUrl, {
+                        method: "POST",
+                        headers: { "Content-Type": data.file!.type },
+                        body: data.file,
+                    });
+                    const { storageId } = await result.json();
 
-            form.reset();
-            setOpen(false);
-        } catch (error) {
-            console.log(error)
-        } finally {
-            setIsLoading(false);
-        }
+                    await createFile({
+                        name: data.title,
+                        fileId: storageId,
+                        orgId,
+                    })
+
+                    form.reset();
+
+                } catch (error) {
+                    console.log(error)
+                }
+            })(),
+            {
+                loading: 'Uploading file...',
+                success: 'File uploaded successfully!',
+                error: 'Failed to upload file.',
+            }
+        )
     }
 
     return (
@@ -87,7 +97,7 @@ const NewFileDialog = () => {
                                 <FormItem>
                                     <FormLabel>Title</FormLabel>
                                     <FormControl>
-                                        <Input disabled={isLoading} placeholder="Enter a title" {...field} />
+                                        <Input placeholder="Enter a title" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -103,7 +113,6 @@ const NewFileDialog = () => {
                                         <Input
                                             type='file'
                                             placeholder="Add a file" {...field}
-                                            disabled={isLoading}
                                             onChange={(event) => {
                                                 if (!event.target.files) return;
                                                 onChange(event.target.files[0]);
@@ -116,8 +125,8 @@ const NewFileDialog = () => {
                             )}
                         />
                         <DialogFooter className='pt-3'>
-                            <Button disabled={isLoading} variant='outline' onClick={() => setOpen(false)}>Cancel</Button>
-                            <Button disabled={isLoading} type="submit">Upload</Button>
+                            <Button variant='outline' onClick={() => setOpen(false)}>Cancel</Button>
+                            <Button type="submit">Upload</Button>
                         </DialogFooter>
                     </form>
                 </Form>
