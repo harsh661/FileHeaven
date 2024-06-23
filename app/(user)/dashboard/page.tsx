@@ -1,15 +1,19 @@
+'use client';
+
 import Button from '@/components/ui/button'
 import { api } from '@/convex/_generated/api'
-import { useOrganization, useUser } from '@clerk/nextjs';
+import { useOrganization, useUser, useClerk } from '@clerk/nextjs';
 import { useMutation, useQuery } from 'convex/react'
 import React from 'react'
 import Header from '../_components/header';
 import NewFileDialog from '../_components/NewFileDialog';
+import ActionButton from '@/components/ui/action_button';
+import { MdOutlineGroupAdd } from "react-icons/md";
 
 const dashboard = () => {
   // const { isLoaded: isOrgLoaded, organization } = useOrganization();
   // const { isLoaded: isUserLoaded, user } = useUser();
-  // const createFile = useMutation(api.files.createFile);
+  const { openCreateOrganization } = useClerk()
 
   // const isLoaded = isOrgLoaded && isUserLoaded;
 
@@ -26,8 +30,14 @@ const dashboard = () => {
   return (
     <div className='px-5 lg:px-10 pb-5'>
       <Header />
-      <div className='py-5'>
+      <div className='py-5 flex items-center gap-5'>
         <NewFileDialog />
+        <ActionButton
+          icon={MdOutlineGroupAdd}
+          onClick={openCreateOrganization}
+        >
+          New Organization
+        </ActionButton>
       </div>
     </div>
   )

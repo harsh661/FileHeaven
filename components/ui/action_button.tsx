@@ -18,7 +18,7 @@ const ActionButton = ({ icon: Icon, onClick, children, isLoading, className, dis
             onClick={onClick}
             disabled={disabled || isLoading}
         >
-            <Icon />
+            <Icon size={20}/>
             {children}
         </button>
     )

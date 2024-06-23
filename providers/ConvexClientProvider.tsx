@@ -19,7 +19,7 @@ export default function ConvexClientProvider({
                     card: { boxShadow: 'none' },
                     footer: { background: '#fff' },
                     formButtonPrimary: {
-                        padding: "8px 0",
+                        padding: "8px 28px",
                         background: "#216D66",
                         "&:hover": {
                             background: "#216D66",
