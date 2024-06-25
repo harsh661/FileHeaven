@@ -1,11 +1,13 @@
 import { ConvexError, v } from 'convex/values'
 import { mutation, query } from './_generated/server'
+import { fileType } from './schema';
 
 export const createFile = mutation({
     args: {
         name: v.string(),
         orgId: v.string(),
         fileId: v.id('_storage'),
+        type: fileType
     },
     handler: async (ctx, args) => {
         const authorized = await ctx.auth.getUserIdentity();
@@ -18,6 +20,7 @@ export const createFile = mutation({
             name: args.name,
             orgId: args.orgId,
             fileId: args.fileId,
+            type: args.type,
         })
     },
 })

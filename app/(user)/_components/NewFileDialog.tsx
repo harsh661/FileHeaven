@@ -14,6 +14,7 @@ import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useOrganization, useUser } from '@clerk/nextjs';
 import toast from 'react-hot-toast';
+import { Doc } from '@/convex/_generated/dataModel';
 
 const NewFileDialog = () => {
     const [open, setOpen] = useState(false);
@@ -59,10 +60,21 @@ const NewFileDialog = () => {
                     });
                     const { storageId } = await result.json();
 
+                    const fileTypes = {
+                        "image/png": "image",
+                        "image/jpeg": "image",
+                        "image/gif": "image",
+                        "application/pdf": "pdf",
+                        "application/zip": "zip",
+                        "text/csv": "csv",
+                        "text/plain": "txt",
+                    } as Record<string, Doc<"files">["type"]>
+
                     await createFile({
                         name: data.title,
                         fileId: storageId,
                         orgId,
+                        type: fileTypes[data.file!.type] || 'any'
                     })
 
                     form.reset();
