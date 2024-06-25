@@ -53,6 +53,23 @@ export const generateUploadUrl = mutation(async (ctx) => {
     return ctx.storage.generateUploadUrl();
 })
 
+export const generateFileUrl = mutation({
+    args: {
+        fileId: v.id("_storage")
+    },
+    handler: async (ctx, args) => {
+        const authorized = await ctx.auth.getUserIdentity();
+
+        if (!authorized) {
+            throw new ConvexError("You are not authorized to upload files. Please log in to your account.")
+        };
+
+        const url = await ctx.storage.getUrl(args.fileId);
+
+        return url
+    }
+})
+
 export const deleteFile = mutation({
     args: { fileId: v.id("files") },
     handler: async (ctx, args) => {
