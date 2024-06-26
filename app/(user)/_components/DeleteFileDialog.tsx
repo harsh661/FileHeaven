@@ -17,7 +17,7 @@ import { Doc } from '@/convex/_generated/dataModel';
 import toast from 'react-hot-toast';
 
 
-const DeleteFileDialog = ({ file }: { file: Doc<"files"> }) => {
+const DeleteFileDialog = ({ file, setIsOpen }: { file: Doc<"files">, setIsOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
     const deleteFile = useMutation(api.files.deleteFile);
     return (
         <Dialog>
@@ -39,6 +39,7 @@ const DeleteFileDialog = ({ file }: { file: Doc<"files"> }) => {
                     <Button onClick={() => {
                         deleteFile({ fileId: file._id })
                         toast.success("File deleted successfully")
+                        setIsOpen(false)
                     }}
                         variant='danger'
                         type="submit">
