@@ -8,7 +8,7 @@ import { MdOutlineGroupAdd } from "react-icons/md";
 import { useClerk } from '@clerk/nextjs';
 import FilesView from '../_components/filesView';
 
-const dashboard = () => {
+const Dashboard = () => {
   const { openCreateOrganization } = useClerk()
 
   return (
@@ -29,4 +29,4 @@ const dashboard = () => {
   )
 }
 
-export default dashboard
+export default Dashboard
