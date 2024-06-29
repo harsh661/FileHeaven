@@ -13,6 +13,7 @@ export default function ConvexClientProvider({
 }) {
     return (
         <ClerkProvider
+            afterSignOutUrl={'/'}
             appearance={{
                 elements: {
                     cardBox: { boxShadow: 'none' },
@@ -33,7 +34,7 @@ export default function ConvexClientProvider({
                         padding: '8px',
                         width: '100%',
                         justifyContent: 'left',
-                        "&:focus-within" : { background: '#fff'}
+                        "&:focus-within": { background: '#fff' }
                     },
                     avatarBox: { width: '32px', height: '32px' },
                     organizationPreviewMainIdentifier: { fontSize: '16px' },
