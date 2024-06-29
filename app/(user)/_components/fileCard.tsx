@@ -7,6 +7,7 @@ import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import Image from 'next/image';
 import OptionsMenu from './optionsMenu';
+import { RiStarFill } from 'react-icons/ri';
 
 const getFileIcon = (type: string) => {
     switch (type) {
@@ -45,6 +46,12 @@ const FileCard = ({ file, isFavorite }: { file: Doc<"files">, isFavorite: boolea
     return (
         <div className='flex flex-col w-full'>
             <div className='aspect-video flex items-center justify-center bg-neutral-200 rounded-lg relative'>
+                {/* Show a star if marked as favorite */}
+                {isFavorite &&
+                    <span className='text-primary absolute left-2 top-2'>
+                        <RiStarFill size={20} />
+                    </span>
+                }
                 {fileUrl && file.type === "image" ?
                     <Image
                         src={fileUrl}

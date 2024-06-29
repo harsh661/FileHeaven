@@ -14,7 +14,7 @@ const dashboard = () => {
   return (
     <div className='px-5 lg:px-10 pb-5'>
       <Header />
-      <div className='py-5 flex items-center gap-5'>
+      <div className='pt-5 flex items-center gap-5'>
         <NewFileDialog />
         <ActionButton
           icon={MdOutlineGroupAdd}

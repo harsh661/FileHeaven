@@ -8,7 +8,7 @@ import FileCard from './fileCard';
 import { useSearchQuery } from '@/store/searchStore';
 import { Id } from '@/convex/_generated/dataModel';
 
-const FilesView = () => {
+const FilesView = ({ favoriteOnly }: { favoriteOnly?: boolean }) => {
     const { isLoaded: isOrgLoaded, organization } = useOrganization();
     const { isLoaded: isUserLoaded, user } = useUser();
     const query = useSearchQuery(state => state.query);
@@ -21,18 +21,22 @@ const FilesView = () => {
         orgId = organization?.id || user?.id || null;
     }
 
-    const files = useQuery(api.files.getFiles, orgId ? { orgId, query } : "skip")
-    const favorites = useQuery(api.files.getFavorites, orgId ? { orgId } : "skip")
+    const filesQuery = useQuery(api.files.getFiles, orgId ? { orgId, query } : "skip")
+    const favoritesQuery = useQuery(api.files.getFavorites, orgId ? { orgId } : "skip")
 
     const isFavorite = (fileId: Id<"files">) => {
-        return favorites ? favorites.some(favorite => favorite.fileId === fileId) : false
+        return favoritesQuery ? favoritesQuery.some(favorite => favorite.fileId === fileId) : false
     }
+
+    const filteredFiles = favoriteOnly
+        ? filesQuery?.filter(file => favoritesQuery?.some(favorite => favorite.fileId === file._id))
+        : filesQuery;
 
     return (
         <div className='pb-5 flex flex-col gap-5'>
-            <h2 className='font-medium text-lg'>My Files</h2>
+            <h2 className='font-medium text-lg pt-5'>{favoriteOnly ? "Favorite " : "My "} Files</h2>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
-                {(files && files.length > 0) ? files.map((file) => (
+                {filteredFiles && filteredFiles.length > 0 ? filteredFiles.map((file) => (
                     <FileCard key={file._id} file={file} isFavorite={isFavorite(file._id)} />
                 )) : (
                     <div>No Files uploaded!</div>
