@@ -9,5 +9,9 @@ export default defineSchema({
         orgId: v.string(),
         fileId: v.id('_storage'),
         type: fileType
-    }).index("by_orgId", ['orgId'])
+    }).index("by_orgId", ['orgId']),
+    favorites: defineTable({
+        fileId: v.id("files"),
+        orgId: v.string()
+    }).index("by_orgId_fileId", ["orgId", "fileId"])
 })

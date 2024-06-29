@@ -23,7 +23,7 @@ const getFileIcon = (type: string) => {
     }
 };
 
-const FileCard = ({ file }: { file: Doc<"files"> }) => {
+const FileCard = ({ file, isFavorite }: { file: Doc<"files">, isFavorite: boolean }) => {
     const generateFileUrl = useMutation(api.files.generateFileUrl);
     const [fileUrl, setFileUrl] = useState<string | null>(null);
 
@@ -54,7 +54,7 @@ const FileCard = ({ file }: { file: Doc<"files"> }) => {
                         quality={20}
                     /> :
                     <div className='text-3xl'>{fileIcon}</div>}
-                <OptionsMenu file={file} fileUrl={fileUrl} />
+                <OptionsMenu file={file} fileUrl={fileUrl} isFavorite={isFavorite} />
             </div>
             <div className='flex flex-col gap-2 py-1'>
                 <div className='font-medium line-clamp-2 flex items-center gap-1'>

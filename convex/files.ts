@@ -91,7 +91,7 @@ export const deleteFile = mutation({
             throw new ConvexError("You are not authorized to delete files. Please log in to your account.")
         }
 
-        const file = ctx.db.get(args.fileId)
+        const file = await ctx.db.get(args.fileId)
 
         if (!file) {
             throw new ConvexError("File does not exist!")
@@ -99,4 +99,56 @@ export const deleteFile = mutation({
 
         await ctx.db.delete(args.fileId)
     },
+})
+
+export const toggleFavorite = mutation({
+    args: { fileId: v.id("files") },
+    handler: async (ctx, args) => {
+        const authorized = await ctx.auth.getUserIdentity();
+
+        if (!authorized) {
+            throw new ConvexError("You are not authorized to favorite files.")
+        }
+
+        const file = await ctx.db.get(args.fileId)
+
+        if (!file) {
+            throw new ConvexError("File does not exist!")
+        }
+
+        const favorite = await ctx.db
+            .query("favorites")
+            .withIndex("by_orgId_fileId", (q) =>
+                q.eq('orgId', file.orgId).eq('fileId', file._id))
+            .first();
+
+        // If not marked then add file to favorite, else delete from favorite
+        if (!favorite) {
+            await ctx.db.insert("favorites", {
+                orgId: file.orgId,
+                fileId: file._id
+            })
+        } else {
+            await ctx.db.delete(favorite._id)
+        }
+    },
+})
+
+export const getFavorites = query({
+    args: { orgId: v.string() },
+    handler: async (ctx, args) => {
+        const authorized = await ctx.auth.getUserIdentity();
+
+        if (!authorized) {
+            return [];
+        }
+
+        const favorites = await ctx.db
+            .query("favorites")
+            .withIndex("by_orgId_fileId", (q) =>
+                q.eq("orgId", args.orgId)
+            ).collect()
+
+        return favorites;
+    }
 })

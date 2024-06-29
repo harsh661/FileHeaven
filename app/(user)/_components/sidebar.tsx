@@ -26,7 +26,7 @@ const Sidebar = () => {
             <OrganizationSwitcher appearance={{ elements: { rootBox: { width: '100%' } } }} />
             <ul className='flex flex-col pt-5'>
                 <SidebarItem label='Home' icon={RiHome6Line} path='/dashboard' />
-                <SidebarItem label='Favourites' icon={RiStarLine} path='#' />
+                <SidebarItem label='Favorites' icon={RiStarLine} path='#' />
                 <SidebarItem label='Trash' icon={RiDeleteBin7Line} path='#' />
             </ul>
         </div>
