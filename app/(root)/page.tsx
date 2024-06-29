@@ -1,4 +1,5 @@
 import Button from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -11,8 +12,8 @@ export default function Home() {
         <Button>Get Started Now</Button>
       </Link>
 
-      <div className="rounded-3xl border border-black w-full max-w-screen-xl h-[80vh] my-20">
-
+      <div className="relative rounded-3xl overflow-hidden border shadow-xl w-4/5 max-w-screen-xl h-[80vh] my-20 z-50">
+        <Image src={'/assets/dashboard.png'} alt="Dashboard" fill className="z-50"/>
       </div>
 
       <div className="shape1"></div>
