@@ -4,9 +4,9 @@ import Searchbox from './searchbox'
 
 const Header = () => {
     return (
-        <div className='py-5 flex items-center border-b-2'>
+        <div className='py-5 flex flex-col md:flex-row md:items-center border-b-2'>
             <p className='text-2xl font-semibold flex-1'>Welcome back</p>
-            <div className='flex-1 flex gap-5 items-center justify-end'>
+            <div className='flex-1 flex gap-5 items-center md:justify-end mt-2 md:mt-0'>
                 <Searchbox />
                 <div className='hidden lg:block'>
                     <UserButton

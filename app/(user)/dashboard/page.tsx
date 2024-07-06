@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <div className='px-5 lg:px-10 pb-5'>
       <Header />
-      <div className='pt-5 flex items-center gap-5'>
+      <div className='pt-5 grid grid-cols-2 md:flex items-center gap-3 md:gap-5'>
         <NewFileDialog />
         <ActionButton
           icon={MdOutlineGroupAdd}

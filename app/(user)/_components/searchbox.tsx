@@ -23,7 +23,7 @@ const Searchbox = () => {
   }
 
   return (
-    <div className='flex items-center p-2 rounded-lg bg-neutral-200 text-black/60'>
+    <div className='flex items-center p-2 rounded-lg bg-neutral-200 text-black/60 w-full md:w-auto'>
       <RiSearchLine size={20} />
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>

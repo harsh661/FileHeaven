@@ -14,7 +14,7 @@ type ActionButtonProps = {
 const ActionButton = ({ icon: Icon, onClick, children, isLoading, className, disabled }: ActionButtonProps) => {
     return (
         <button
-            className={cn('flex flex-col gap-2 p-2 pr-10 rounded-lg border-2 border-black/20 font-medium', className)}
+            className={cn('flex flex-col gap-2 p-2 md:pr-10 rounded-lg border-2 border-black/20 font-medium text-sm whitespace-nowrap', className)}
             onClick={onClick}
             disabled={disabled || isLoading}
         >

@@ -136,7 +136,7 @@ const NewFileDialog = () => {
                                 </FormItem>
                             )}
                         />
-                        <DialogFooter className='pt-3'>
+                        <DialogFooter className='pt-3 flex flex-row items-center justify-end gap-2'>
                             <Button variant='outline' onClick={() => setOpen(false)}>Cancel</Button>
                             <Button type="submit">Upload</Button>
                         </DialogFooter>

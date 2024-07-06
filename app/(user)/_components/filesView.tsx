@@ -35,7 +35,7 @@ const FilesView = ({ favoriteOnly }: { favoriteOnly?: boolean }) => {
     return (
         <div className='pb-5 flex flex-col gap-5'>
             <h2 className='font-medium text-lg pt-5'>{favoriteOnly ? "Favorite " : "My "} Files</h2>
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {filteredFiles && filteredFiles.length > 0 ? filteredFiles.map((file) => (
                     <FileCard key={file._id} file={file} isFavorite={isFavorite(file._id)} />
                 )) : (
